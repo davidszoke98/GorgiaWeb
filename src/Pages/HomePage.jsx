@@ -15,10 +15,10 @@ export default function HomePage() {
                     <img src={require('../Assets/georgialogo.png')}></img>
                 </Logo>
                 <div style={{display:"flex",width:'100%',justifyContent:'center',alignItems:'center'}}>
-                    <Button onClick={()=>{window.location.href="/login"}} background="#E1E2E1">
+                    <Button onClick={()=>{window.location.href="/return"}} background="#E1E2E1">
                         <h1>Return Book</h1>
                     </Button>
-                    <Button onClick={()=>{window.location.href="/login"}} background="#67C2E8">
+                    <Button onClick={()=>{window.location.href="/borrow"}} background="#67C2E8">
                         <h1 style={{color:'white'}}>Borrow book</h1>
                     </Button>
                 </div>

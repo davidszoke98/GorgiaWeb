@@ -2,17 +2,15 @@ import React,{useEffect,useState} from 'react'
 import Logo from '../Components/logo.jsx'
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
-import AuthService from '../Network/AuthService';
-export default function LoginPage() {
-    const [number,setNumber]=useState('1788981456');
-    const [pass,setPass]=useState('651-84-3090');
+import BookReturnService from '../Network/BookReturnService';
+export default function ReturnPage() {
+    const [id,setId]=useState('4');
     const [active,setActive]=useState('number');
     var [isCorrect, setCorrect] = useState(true)
 
     const confirm=()=>{
-        console.log('number',number);
-        console.log("pass",pass);
-        AuthService.login({login:number,password:"Pass"+pass+"word"}).then(x=>{
+        console.log('id',id);
+        BookReturnService.returnBook({bookCatalogId: id}).then(x=>{
             console.log(x);
             window.localStorage.setItem('token',x);
             window.location.reload();
@@ -24,29 +22,18 @@ export default function LoginPage() {
     const onKeyPress=(value)=>{
         if(value==="bk"){
             if(active==='number'){
-                setNumber(number.slice(0,number.length-1))
-            }
-            else if(active==='pass'){
-                setPass(pass.slice(0,pass.length-1)) 
+                setId(id.slice(0,id.length-1))
             }
             return;
         }
         if(value==="cl"){
             if(active==='number'){
-                setNumber("")
-            }
-            else if(active==='pass'){
-                setPass("") 
+                setId("")
             }
             return;
         }
         if(active==='number'){
-            setNumber(number+value)
-        }
-        else if(active==='pass'){
-            if(pass.length<11){
-                setPass(pass+value);
-            }
+            setId(id+value)
         }
     }
 
@@ -56,12 +43,9 @@ export default function LoginPage() {
                 <Logo>
                     <img src={require('../Assets/georgialogo.png')}></img>
                 </Logo>
-                {isCorrect ? null : <h3 style={{color: 'red', position: 'absolute', marginTop:'-16vh'}}>Incorrect card number or password</h3>}
-                <h3>Enter your card number:</h3>
-                <input type="text" autocomplete="autocomplete_off_hack_xfr4!k" onKeyDown={(e) => e.preventDefault()} onFocus={()=>{setActive('number')}} style={{paddingLeft:5,paddingRight:5,borderRadius:5,border:active==='number'?'1.5px solid #67C2E8':'1px solid #999999',fontSize:24,width:300,}} name="number" onChange={(e)=>{setNumber(e.target.value)}} value={number}>
-                </input>
-                <h3>Enter your password:</h3>
-                <input type="password" autocomplete="autocomplete_off_hack_xfr4!k" onKeyDown={(e) => e.preventDefault()} maxLength="4" onFocus={()=>{setActive('pass')}} style={{paddingLeft:5,paddingRight:5,borderRadius:5,border:active==='pass'?'1.5px solid #67C2E8':'1px solid #999999',fontSize:24,width:300,}} name="pass" onChange={(e)=>{setPass(e.target.value)}} value={pass}>
+                {isCorrect ? null : <h3 style={{color: 'red', position: 'absolute', marginTop:'-10vh'}}>Incorrect book ID</h3>}
+                <h3>Enter book ID to return:</h3>
+                <input type="text" autocomplete="autocomplete_off_hack_xfr4!k" onKeyDown={(e) => e.preventDefault()} onFocus={()=>{setActive('number')}} style={{paddingLeft:5,paddingRight:5,borderRadius:5,border:active==='number'?'1.5px solid #67C2E8':'1px solid #999999',fontSize:24,width:300,}} name="number" onChange={(e)=>{setId(e.target.value)}} value={id}>
                 </input>
                 <div style={{width:300,marginTop:20}}>
                     <Keyboard

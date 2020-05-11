@@ -2,6 +2,8 @@ import React from 'react';
 //PAGES
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
+import BorrowPage from './Pages/BorrowPage';
+import ReturnPage from './Pages/ReturnPage';
 
 //ROUTER
 import {
@@ -17,6 +19,8 @@ function App() {
     return (
       <Router>
         <Switch>
+          <Route path="/borrow" component={BorrowPage}></Route>
+          <Route path="/return" component={ReturnPage}></Route>
           <Route path="/" component={HomePage}></Route>
         </Switch>
       </Router>
