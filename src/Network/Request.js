@@ -1,4 +1,5 @@
 import axios from 'axios';
+window.axios=axios;
 /**
  * Request Wrapper with default success/error actions
  */
@@ -6,6 +7,7 @@ var baseApiAddress="http://localhost:8080/gtl";
 
 const request = async function (options) {
   const token=window.localStorage.getItem('token');
+  window.token=token;
   const client = axios.create({
     baseURL: baseApiAddress,
     headers:token?{

@@ -10,7 +10,15 @@
 .card_button:hover{
     opacity:0.8;
 }
-
+body{
+    height:100vh;
+}
+.bookListingTitle h3{ 
+    margin:0
+}
+.bookListing h3{ 
+    margin:0
+}
 input:focus,
 select:focus,
 textarea:focus,

@@ -7,6 +7,9 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "moment": "^2.25.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
@@ -14,7 +17,7 @@
     "react-simple-keyboard": "^2.3.31"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_NOT_SECRET_CODE=adgadgeiangeiaig32i3nignifn2giegg2gi444g24in react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
