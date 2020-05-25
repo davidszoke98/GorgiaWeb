@@ -10,10 +10,10 @@ export default function LoginPage() {
     //librarian
     // const [number,setNumber]=useState('1045946125');
     // const [pass,setPass]=useState('011-53-8195'); 
-    const [number,setNumber]=useState('1808431305');
-    const [pass,setPass]=useState('674-26-7227');
-    // const [number,setNumber]=useState('1788981456');
-    // const [pass,setPass]=useState('651-84-3090');
+    //const [number,setNumber]=useState('1808431305');
+    //const [pass,setPass]=useState('674-26-7227');
+    const [number,setNumber]=useState('1788981456');
+    const [pass,setPass]=useState('651-84-3090');
     const [active,setActive]=useState('number');
     var [isCorrect, setCorrect] = useState(true)
 

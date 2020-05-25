@@ -4,12 +4,14 @@ import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import BookReturnService from '../Network/BookReturnService';
 import BookListing from '../Components/BookListing';
+import BookReturnListing from '../Components/BookReturnListing'
 import UserService from '../Network/UserService';
 
 export default function ReturnPage() {
     const [id,setId]=useState('');
     const [active,setActive]=useState('number');
-    var [booksBorrowed,setBooksBorrowed]=useState([]);
+    var [booksReturned,setBooksReturned]=useState([]);
+    var [bookReturnIds,setBookReturnIds]=useState([])
     var [isCorrect, setCorrect] = useState(true)
     var [isReturned, setReturned] = useState(false)
 
@@ -17,7 +19,12 @@ export default function ReturnPage() {
         setReturned(false);
         setCorrect(true)
         BookReturnService.returnBook({bookCatalogId: id}).then(x=>{
-            window.location.reload()
+            var bookIds = [...bookReturnIds];
+            bookIds.push(id)
+            setBookReturnIds(bookIds)
+            var borrowedBooks=[...booksReturned];
+            borrowedBooks.push('Returned');
+            setBooksReturned(borrowedBooks);
         }).catch(x=>{
             setCorrect(false)
         })
@@ -31,7 +38,7 @@ export default function ReturnPage() {
     const getBorrowings=()=>{
         UserService.getCurrentBorrowings().then(x=>{
             console.log(x);
-            setBooksBorrowed(x);
+            setBooksReturned(x);
         }).catch(x=>{
             console.log(x);
         })
@@ -92,22 +99,20 @@ export default function ReturnPage() {
                     <div className="card_button" onClick={confirm} style={{cursor:'pointer',width:300,marginTop:20,fontSize:24,background:'#67C2E8',color:'white',border:'none',borderRadius:5,display:'flex',justifyContent:'center',alignItems:'center'}}>Confirm</div>
                     <div className="card_button" onClick={done} style={{cursor:'pointer',width:300,marginTop:20,fontSize:24,background:'#E1E2E1',color:'black',border:'none',borderRadius:5,display:'flex',justifyContent:'center',alignItems:'center'}}>Finish</div>
                 </div>
-                <div style={{width:'100vw',minHeight:200,paddingTop:20}}>
-                    <div className="bookListingTitle" style={{height:40,width:'calc(100%)',backgroundColor:'rgb(103, 194, 232)',display:'flex',flexDirection:'row',paddingLeft:'15%',paddingRight:'15%',justifyContent:'space-between',alignItems:'center'}}>
+                {booksReturned.length>0?<div style={{width:'100vw',minHeight:200,paddingTop:20}}>
+                <h3 style={{textAlign:"center"}}>Your returned books:</h3>
+                <div className="bookListingTitle" style={{height:40,width:'calc(100%)',backgroundColor:'rgb(103, 194, 232)',display:'flex',flexDirection:'row',paddingLeft:'15%',paddingRight:'15%',justifyContent:'space-between',alignItems:'center'}}>
                         <div style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                            <h3 style={{textAlign:'center'}}>Title</h3>
+                            <h3 style={{textAlign:'center'}}>Status</h3>
                         </div>
                         <div style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                            <h3 style={{textAlign:'center'}}>Author</h3>
-                        </div>
-                        <div style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                            <h3 style={{textAlign:'center'}}>Release Date</h3>
+                            <h3 style={{textAlign:'center'}}>Book id</h3>
                         </div>
                     </div>
-                    {booksBorrowed.map((item,index)=>{
-                        return (<BookListing key={index} item={item} even={index%2===0}></BookListing>)
+                    {bookReturnIds.map((item,index)=>{
+                        return ( <BookReturnListing key={index} item={item} even={index%2===0}></BookReturnListing> )
                     })}
-                </div>
+                </div>:null}
         </div>
     )
 }
