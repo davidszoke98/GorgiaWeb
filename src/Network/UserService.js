@@ -2,7 +2,7 @@ import request from './Request';
 
 function getCurrentBorrowings(){
   return request({
-    url:    `/dummy/address`,
+    url:    `/book/0`,
     method: 'GET',
   });
 }

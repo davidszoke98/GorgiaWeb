@@ -7,7 +7,7 @@ import BookListing from '../Components/BookListing';
 import UserService from '../Network/UserService';
 
 export default function ReturnPage() {
-    const [id,setId]=useState('818');
+    const [id,setId]=useState('');
     const [active,setActive]=useState('number');
     var [booksBorrowed,setBooksBorrowed]=useState([]);
     var [isCorrect, setCorrect] = useState(true)
@@ -17,8 +17,7 @@ export default function ReturnPage() {
         setReturned(false);
         setCorrect(true)
         BookReturnService.returnBook({bookCatalogId: id}).then(x=>{
-            setReturned(true);
-            setId("");
+            window.location.reload()
         }).catch(x=>{
             setCorrect(false)
         })
@@ -31,6 +30,7 @@ export default function ReturnPage() {
 
     const getBorrowings=()=>{
         UserService.getCurrentBorrowings().then(x=>{
+            console.log(x);
             setBooksBorrowed(x);
         }).catch(x=>{
             console.log(x);
@@ -93,7 +93,7 @@ export default function ReturnPage() {
                     <div className="card_button" onClick={done} style={{cursor:'pointer',width:300,marginTop:20,fontSize:24,background:'#E1E2E1',color:'black',border:'none',borderRadius:5,display:'flex',justifyContent:'center',alignItems:'center'}}>Finish</div>
                 </div>
                 <div style={{width:'100vw',minHeight:200,paddingTop:20}}>
-                    <div className="bookListingTitle" style={{height:40,width:'calc(70%)',backgroundColor:'rgb(103, 194, 232)',display:'flex',flexDirection:'row',paddingLeft:'15%',paddingRight:'15%',justifyContent:'space-between',alignItems:'center'}}>
+                    <div className="bookListingTitle" style={{height:40,width:'calc(100%)',backgroundColor:'rgb(103, 194, 232)',display:'flex',flexDirection:'row',paddingLeft:'15%',paddingRight:'15%',justifyContent:'space-between',alignItems:'center'}}>
                         <div style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                             <h3 style={{textAlign:'center'}}>Title</h3>
                         </div>

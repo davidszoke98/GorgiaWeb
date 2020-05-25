@@ -4,7 +4,12 @@ import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
 import BorrowPage from './Pages/BorrowPage';
 import ReturnPage from './Pages/ReturnPage';
-
+import CataloguePage from './Pages/CataloguePage';
+import StatisticsPage from './Pages/StatisticsPage';
+import NotFoundPage from './Pages/NotFoundPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import decodeRole from './Helpers/DecodeRole';
+//Crypto
 import aes from "crypto-js/aes";
 import Base64 from 'crypto-js/enc-base64';
 import CryptoJS from "crypto-js"
@@ -41,6 +46,8 @@ function App() {
         <Switch>
           <Route path="/borrow" component={BorrowPage}></Route>
           <Route path="/return" component={ReturnPage}></Route>
+          <Route path="/catalogue" component={decodeRole()==='student'?NotFoundPage:CataloguePage}></Route>
+          <Route path="/statistics" component={decodeRole()==='student'?NotFoundPage:StatisticsPage}></Route>
           <Route path="/" component={HomePage}></Route>
         </Switch>
       </Router>
