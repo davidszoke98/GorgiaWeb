@@ -9,7 +9,6 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "crypto-js": "^4.0.0",
-    "dotenv": "^8.2.0",
     "moment": "^2.25.3",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -20,7 +19,7 @@
     "react-simple-keyboard": "^2.3.31"
   },
   "scripts": {
-    "start": "REACT_APP_NOT_SECRET_CODE=adgadgeiangeiaig32i3nignifn2giegg2gi444g24in react-scripts start",
+    "start": "set \"REACT_APP_NOT_SECRET_CODE=adgadgeiangeiaig32i3nignifn2giegg2gi444g24in\" && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

@@ -25,7 +25,7 @@ export default function LoginPage() {
             var encRole=aes.encrypt(x.authRole,process.env.REACT_APP_NOT_SECRET_CODE);
             window.localStorage.setItem("exp",encExp);
             window.localStorage.setItem("role",encRole);
-            window.location.reload();
+            window.location.reload();            
         }).catch(x=>{
             setCorrect(false)
         })
